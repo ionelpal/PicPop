@@ -1,0 +1,50 @@
+﻿@model PicPop.Models.ImageSearchViewModel
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using PagedList.Mvc;
+@using PagedList;
+
+
+
+
+@*<div class="row">
+        <div class="col-xs-3"><a href="#" class="btn btn-primary" onclick="$('#newSearch').toggleClass('hidden')">New Search</a></div>
+    </div>*@
+@using (Html.BeginForm())
+{
+
+
+    <div class="text-center control-label text-info">
+        @Html.LabelFor(m => m.Categories)
+
+        @Html.DropDownListFor(m => m.Id, Model.Categories, new { onchange = "this.form.submit();", @class = "text-info" })
+
+    </div>
+
+}
+
+<div class="row">
+    <div id="portfolio" class="row">
+            @foreach (var item in Model.List)
+            {
+                <div class="col-xs-3">
+                        <a href="@Url.Action("Details", "Image", new {id = item.Id})">
+                            <img src="@item.Blob" alt="" class="img img-responsive" style="width:100% !important;" />
+                        </a>
+                        <span class="col-xs-6 pull-left"><span class="text-info">Price </span><span class="text-danger"> @item.Amount.ToString("#.##") €</span></span>
+                        @if (Request.IsAuthenticated)
+                {
+                            <a href="#" data-id="@item.Id" class="AddToCart col-xs-1 pull-right"><i class="glyphicon glyphicon-shopping-cart text-warning"></i></a>
+                        }
+                    </div>
+            }
+        
+    </div>
+</div>
+
+
+    <div class="col-lg-3 col-lg-offset-3">
+        @Html.PagedListPager((IPagedList)Model.List, page => Url.Action("Index", new { page = page, id = Model.Id }))
+    </div>

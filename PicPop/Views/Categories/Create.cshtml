@@ -1,0 +1,58 @@
+﻿@model PicPop.Models.CategoriesCreateViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h3 class="text-center text-info">Add New Repository Category</h3>
+        <br />
+        <p class="text-center text-danger"> Administrator Area</p>
+        <br />
+        <div class="form-horizontal">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+
+                <h4 class="text-primary text-center">Please enter the name for the new category</h4>
+                <br />
+
+
+
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="text-center">
+
+                        <button type="submit" class="btn btn-primary btn-xs">Create</button> |
+                        <button type="button" class="btn btn-primary btn-xs">  @Html.ActionLink("Back to List", "Index")</button>
+                    </div>
+                </div>
+
+
+
+            }
+
+
+        </div>
+
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+
+
+        <br />
+    </div>
+</div>

@@ -1,0 +1,148 @@
+﻿@using PicPop.BusinessLogic
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1,user-scalable=no ">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href='http://fonts.googleapis.com/css?family=Dosis:200,400,600' rel='stylesheet' type='text/css'>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container">
+
+        <div class="text-warning ">
+            Dublin @Html.Action("GetWeather", "Home")
+        </div>
+       
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <div class="navbar-brand" style="padding-top: 11.5px">
+                        <a href="@Url.Action("Index", "Home")">
+                            <img src="/Content/Images/PicPop.jpg" class="img img-responsive img-circle pull-right" alt="Logo" />
+                            <h4 class="alert alert-info pull-left " style="padding:5px; border-radius:13px; margin-right:3px;">PicPop  Image Repository</h4>
+                        </a>
+
+                    </div>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                   
+                  
+
+                </div>
+              
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    
+
+                    <ul class="nav navbar-nav">
+
+
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        @*<li>@Html.ActionLink("About", "About", "Home")</li>*@
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li>@Html.ActionLink(" All Images", "Index", "Image")</li>
+
+
+                        @if (Request.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("My Images", "MyImages", "Image")</li>
+                        }
+                        @if (User.IsInRole(RoleType.Admin.ToString()))
+                        {
+                            <li>
+                                @Html.ActionLink("Categories", "Index", "Categories")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Admin", "Index", "Manage")
+                            </li>
+                        }
+                        @if (Request.IsAuthenticated && ViewBag.IsTransaction)
+                        {
+                            <li>
+                                @Html.ActionLink("Transactions", "Index", "Transaction")
+                            </li>
+                        }
+
+                        @if (ViewBag.ShopCartNumElements == 0)
+                        {
+                            <li style="display: none">
+                                <a href="@Url.Action("Index", "ShoppingCart")">
+                                    <label id="CartNumElements">@ViewBag.ShopCartNumElements </label>
+                                    <span class="text-center"> </span>  <i class="glyphicon glyphicon-shopping-cart "></i>
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="@Url.Action("Index", "ShoppingCart")"> 
+                                    <label id="CartNumElements"><span class="label label-danger"> @ViewBag.ShopCartNumElements</span></label>
+                                    <span class="glyphicon glyphicon-shopping-cart "></span>
+                                </a>
+                            </li>
+                        }
+
+
+                    </ul>
+                    
+
+
+                    <div >
+                       
+                        @Html.Partial("_LoginPartial")
+
+                    </div>
+                   
+                </div>
+               
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+
+
+        @RenderBody()
+
+    </div>
+    <div class="container">
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <!-- Copyright information -->
+                        <div class="fpadd text-center">
+                            <span class="text-info">   National Collage of Ireland</span> </br>&copy; @DateTime.Now.Year
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </footer>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/easing")*@
+    @Scripts.Render("~/bundles/bootstrap")
+    @*@Scripts.Render("~/bundles/ddlevelsmenu")*@
+    @Scripts.Render("~/bundles/flexslider")
+    @Scripts.Render("~/bundles/isotope")
+    @Scripts.Render("~/bundles/jquery.prettyPhoto")
+    @*@Scripts.Render("~/bundles/custom")*@
+
+    @Scripts.Render("~/bundles/misScripts")
+
+
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>

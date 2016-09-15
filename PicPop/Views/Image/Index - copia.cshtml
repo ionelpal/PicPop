@@ -1,0 +1,47 @@
+﻿@model IEnumerable<PicPop.Models.ImagesDetailsViewModels>
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+   
+
+<div class="row">
+    <div class="span12 hidden-desktop">
+       
+    </div>
+    <div class="span12">
+        <div class="whity content">
+           
+            <div class="posts">
+           
+                <div class="entry">
+                    <div class="padd">
+
+
+
+                        <div id="portfolio">
+                            @*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+                            @foreach (var item in Model)
+                                {
+                                <div>
+                                    <a href="@Url.Action("Details", "Image", new {id = item.Id})">
+                                        <img src="@item.Blob" alt="" />
+                                    </a>
+
+                                </div>
+                                }
+
+
+                        </div><!--end of portofolio div-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

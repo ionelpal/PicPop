@@ -1,0 +1,35 @@
+﻿@model IEnumerable<PicPop.Models.ImagesDetailsViewModels>
+@{
+    ViewBag.Title = "MyImages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-2">
+            <h2 class="text-center text-info"> My Images</h2>
+            </br>
+        </div>
+    </div>
+</div>
+<div class="container">    
+    <div class="row">
+        @foreach (var item in Model)
+            {                           <div id="portfolio">
+            <div class="pull-left">
+                <a href="@Url.Action("Details", "Image", new {id = item.Id})">
+                    <img src="@item.Blob" alt="" />
+                </a>
+                @*<img src="@item.Blob" class="img-thumbnail" alt=""/>*@
+                <span class="caption text-center" style="display:block;">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-link" })
+                    @*@Html.ActionLink("Delete", "Delete", new {/* id=item.PrimaryKey */}, new { @class = "btn btn-link" })*@
+                </span>
+            </div>
+        </div><!--end of portofolio div-->
+        }
+        <div class="row text-center">
+            <span class="btn btn-link btn-sm"> @Html.ActionLink("Add new Image", "Create") </span>
+        </div>
+    </div>
+</div>
+</br>

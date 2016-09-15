@@ -1,0 +1,83 @@
+﻿@model PicPop.Models.ImagesDetailsViewModels
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="row">
+    <div>
+        <h2 class="text-info text-center">Image Details</h2>
+        </br>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-2"></br>
+            <ul class="breadcrumb ">
+
+                <li class="breadcrumb">
+                    <span class="text-success">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </span>
+
+                    <span class="text-warning">
+                        @Html.DisplayFor(model => model.Name)
+                    </span>
+                </li>
+
+
+                <li class="breadcrumb">
+                    @Html.DisplayNameFor(model => model.Amount)
+
+                    <span class="text-info">
+                        @Html.DisplayFor(model => model.Amount)<span class="text-danger"> €</span>
+                    </span>
+                </li>
+
+                <li class="breadcrumb">
+                    @Html.DisplayNameFor(model => model.Category)
+                    <span class="text-info">
+                        @Html.DisplayFor(model => model.Category)
+                    </span>
+                </li>
+                @if (Request.IsAuthenticated && !Model.IsMine)
+            {
+                    <a href="#" data-id="@Model.Id" class="AddToCart col-xs-1 pull-right"><i class="glyphicon glyphicon-shopping-cart text-danger"></i></a>
+                }
+
+
+
+            </ul>
+            <div>
+
+                <img src="@Model.Blob" alt="" class="img-responsive  img-thumbnail" style="max-width:500px; height:auto;" />
+
+            </div>
+
+            <div class="text-center">
+                <br />
+                @if (Request.IsAuthenticated)
+            {
+                    <span class="btn btn-primary btn-xs">
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+                    </span>
+                    <span>|</span>
+                    <span class="btn btn-primary btn-xs">
+                        @(Model.IsMine ? Html.ActionLink("Back to List", "MyImages") : Html.ActionLink("Back to List", "Index"))
+                    </span>
+                }
+                else
+                {
+                    <h4 class="text-center text-info">Please login to add image to cart</h4>
+                }
+
+            </div>
+            @if (!Request.IsAuthenticated)
+            {
+                <span class="btn btn-link"> @Html.ActionLink("Return", "Index")</span>
+            }
+            </div>
+
+        </div>
+        <br />
+    </div></br>

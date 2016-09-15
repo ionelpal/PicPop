@@ -1,0 +1,33 @@
+﻿@model PicPop.Models.CategoriesEditViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h3 class="text-center text-info"> Category Details</h3>
+
+        <div>
+            
+            <hr />
+            <dl class="dl-horizontal">
+                <dt class="text-info">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd class="text-uppercase text-danger text-center">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+            </dl>
+        </div>
+        <div class="text-center">
+            <span class="btn btn-primary btn-xs">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id })</span> |
+            <span class="btn btn-primary btn-xs">  @Html.ActionLink("Back to List", "Index")</span>
+
+</div>
+</div>
+</div>
+</br>
